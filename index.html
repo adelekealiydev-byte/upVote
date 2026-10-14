@@ -5,9 +5,71 @@
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vite App</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <div id="app">
+      <h1 class="mb-6 text-2xl font-bold text-gray-800 text-center mt-12">UpVote!</h1>
+  <div class="px-6 py-6 w-full max-w-4xl mx-auto">
+  <article v-for="submission in sortedSubmissions" v-bind:key="submission.id" class="flex items-start border border-gray-200 sm:px-12 px-6 py-6 rounded-lg shadow-sm mt-6"> 
+    <!-- Left Figure -->
+    <figure class="mr-4 shrink-0">
+      <img
+        class="h-16 w-16 rounded object-cover"
+       v-bind:src="submission.submissionImage"
+        alt="vue.js"
+      />
+    </figure>
+
+    <!-- Main Content -->
+    <div class="min-w-0 flex-1">
+      <div>
+        <p class="text-gray-700">
+          <strong>
+            <a v-bind:href="submission.url" class="font-bold text-blue-500 hover:underline">{{submission.title}}</a>
+            <span class="ml-2 inline-flex items-center rounded bg-gray-100 px-2 py-0.5 text-xs font-normal text-gray-600">
+              #{{submission.id}}
+            </span>
+          </strong>
+          <br />
+          {{submission.description}}
+          <br />
+          <small class="inline-flex items-center gap-1 text-xs text-gray-500">
+            Submitted by:
+            <img
+              class="inline-block h-6 w-6 rounded-full align-middle"
+              v-bind:src="submission.avatar"
+              alt="Avatar"
+            />
+          </small>
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Column (Votes) -->
+    <div class="ml-4 shrink-0">
+      <span class="inline-flex cursor-pointer items-center gap-1 text-sm text-blue-500" v-on:click="upvote(submission.id)">
+        <i class="fa fa-chevron-up"></i>
+        <strong class="font-bold text-blue-500">{{submission.votes}}</strong>
+      </span>
+    </div>
+  </article>
+</div>
+
+
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./src/seed.js"></script>
+    <script src="./src/main.js"></script>
+    
+
+
+  
   </body>
 </html>

@@ -1,16 +1,24 @@
-import './assets/main.css'
-import '@fortawesome/fontawesome-free/css/all.min.css'
+// UpVote App (Vue 3)
+const upvoteApp = {
+  data() {
+    return {
+      submissions: Seed.submissions
+    };
+  },
+  computed: {
+    sortedSubmissions() {
+      return [...this.submissions].sort((a, b) => b.votes - a.votes);
+    }
+  },
+  methods: {
+upvote(submissionId) {
+const submission = this.submissions.find(
+submission => submission.id === submissionId
+);
+submission.votes++;
+}
+  }
+};
 
+Vue.createApp(upvoteApp).mount('#app');
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-
-import App from './App.vue'
-import router from './router'
-
-const app = createApp(App)
-
-app.use(createPinia())
-app.use(router)
-
-app.mount('#app')
